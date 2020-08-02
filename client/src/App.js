@@ -1,26 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Balance from './components/molecules/Balance';
+import History from './components/molecules/History';
+import Header from './layouts/Header';
+import Wrapper from './layouts/Wrapper';
+import AddExpense from './components/molecules/AddExpense';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper
+      strDirection="column"
+      strJustifyContent="center"
+      strAlignItems="center">
+      <Header>Expense Tracker</Header>
+      <Balance />
+      <History />
+      <AddExpense />
+    </Wrapper>
   );
-}
+};
 
 export default App;
