@@ -29,11 +29,13 @@ const AddExpense = () => {
           type="text"
           placeholder="Name"
           onChange={(e) => setStrName(e.target.value)}
+          value={strName}
         />
         <Input
           type="text"
           placeholder="Value (£)"
           onChange={(e) => setStrPrice(e.target.value)}
+          value={strPrice}
         />
         <Wrapper strJustifyContent="center" strPadding="1rem">
           <Radio
@@ -61,7 +63,13 @@ const AddExpense = () => {
               type: strType,
             };
 
-            dispatch(actionAddExpense(objExpense));
+            dispatch(
+              actionAddExpense(objExpense, () => {
+                setStrName('');
+                setStrPrice('');
+                setStrType('income');
+              })
+            );
           }}
           color="#4c4"
           accent="#4c4"

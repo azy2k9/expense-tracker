@@ -30,11 +30,14 @@ export const actionFetchExpenses = () => (dispatch) => {
     });
 };
 
-export const actionAddExpense = (objExpense) => (dispatch) => {
+export const actionAddExpense = (objExpense, onSuccessCallback = () => {}) => (
+  dispatch
+) => {
   dispatch(actionAddExpenseBegin());
   return axios
     .post(`${URI_EXPENSES}`, objExpense)
     .then((result) => {
+      onSuccessCallback();
       return dispatch(actionAddExpenseSuccess(result.data));
     })
     .catch((error) => {
