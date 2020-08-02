@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import Wrapper from '../../../layouts/Wrapper/Wrapper';
 import Button from '../../atoms/Button/Button';
 import Title from '../../atoms/Title/Title';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { actionDeleteExpense } from '../../../actions/ActionExpense';
 
 const Container = styled.div`
   width: 50%;
@@ -17,7 +18,7 @@ const HistoryItem = styled.div`
   margin: 0.5rem;
   justify-content: space-between;
   width: 100%;
-  border-right: 0.3rem solid ${({ bExpense }) => (bExpense ? 'green' : 'red')};
+  border-right: 0.3rem solid ${({ bExpense }) => (bExpense ? 'red' : 'green')};
   background-color: white;
   border-radius: 4px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -30,16 +31,23 @@ const HistoryItem = styled.div`
 
 const History = () => {
   const arrExpenses = useSelector((state) => state.ReducerExpense.arrExpenses);
+  const dispatch = useDispatch();
   return (
     <Container>
       <Title>History</Title>
       {arrExpenses.map((objTransaction) => (
-        <Wrapper key={objTransaction.strID}>
+        <Wrapper key={objTransaction.strId}>
           <HistoryItem bExpense={objTransaction.strType === 'expense'}>
             <span>{objTransaction.strName}</span>
             <span>{objTransaction.strPrice}</span>
           </HistoryItem>
-          <Button color="red" accent="#F44336">
+          <Button
+            onClick={() => {
+              dispatch(actionDeleteExpense(objTransaction.strId));
+            }}
+            key={objTransaction.strId}
+            color="red"
+            accent="#F44336">
             Delete
           </Button>
         </Wrapper>

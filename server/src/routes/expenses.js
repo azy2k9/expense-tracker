@@ -129,7 +129,7 @@ router.delete('/expenses/:id', async (req, res) => {
     }
 
     await expense.deleteOne();
-    res.send({ message: 'Successfully deleted expense' });
+    res.json({ strId: id });
   } catch (error) {
     res
       .status(500)

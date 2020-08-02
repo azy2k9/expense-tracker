@@ -24,20 +24,42 @@ export const ADD_EXPENSES_ERROR = 'ADD_EXPENSES_ERROR';
 export const ADD_EXPENSES_BEGIN = 'ADD_EXPENSES_BEGIN';
 export const ADD_EXPENSES_SUCCESS = 'ADD_EXPENSES_SUCCESS';
 
-export const actionAddExpensesBegin = () => ({
+export const actionAddExpenseBegin = () => ({
   type: ADD_EXPENSES_BEGIN,
 });
 
-export const actionAddExpensesFailure = (strError) => ({
+export const actionAddExpenseFailure = (strError) => ({
   payload: {
     strError,
   },
   type: ADD_EXPENSES_ERROR,
 });
 
-export const actionAddExpensesSuccess = (objExpense) => ({
+export const actionAddExpenseSuccess = (objExpense) => ({
   payload: {
     objExpense,
   },
   type: ADD_EXPENSES_SUCCESS,
+});
+
+export const DELETE_EXPENSES_ERROR = 'DELETE_EXPENSES_ERROR';
+export const DELETE_EXPENSES_BEGIN = 'DELETE_EXPENSES_BEGIN';
+export const DELETE_EXPENSES_SUCCESS = 'DELETE_EXPENSES_SUCCESS';
+
+export const actionDeleteExpenseBegin = () => ({
+  type: DELETE_EXPENSES_BEGIN,
+});
+
+export const actionDeleteExpenseFailure = (strError) => ({
+  payload: {
+    strError,
+  },
+  type: DELETE_EXPENSES_ERROR,
+});
+
+export const actionDeleteExpenseSuccess = (strId) => ({
+  payload: {
+    strId,
+  },
+  type: DELETE_EXPENSES_SUCCESS,
 });

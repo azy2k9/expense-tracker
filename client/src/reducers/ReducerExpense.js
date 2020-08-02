@@ -1,5 +1,6 @@
 import {
   ADD_EXPENSES_SUCCESS,
+  DELETE_EXPENSES_SUCCESS,
   FETCH_EXPENSES_SUCCESS,
 } from '../actions/TypeExpense';
 
@@ -16,15 +17,15 @@ export default function (state = initialState, action) {
         arrExpenses: [...state.arrExpenses, objExpense],
       };
     }
-    // case DELETE_EXPENSE: {
-    //   const { id } = action.payload;
-    //   return {
-    //     ...state,
-    //     arrExpenses: state.arrExpenses.filter(
-    //       (objExpense) => objExpense.id !== id
-    //     ),
-    //   };
-    // }
+    case DELETE_EXPENSES_SUCCESS: {
+      const { strId } = action.payload;
+      return {
+        ...state,
+        arrExpenses: state.arrExpenses.filter(
+          (objExpense) => objExpense.strId !== strId
+        ),
+      };
+    }
     case FETCH_EXPENSES_SUCCESS: {
       const { arrExpenses } = action.payload;
       return {

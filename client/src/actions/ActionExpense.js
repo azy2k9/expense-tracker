@@ -4,9 +4,12 @@ import {
   actionFetchExpensesBegin,
   actionFetchExpensesSuccess,
   actionFetchExpensesFailure,
-  actionAddExpensesBegin,
-  actionAddExpensesSuccess,
-  actionAddExpensesFailure,
+  actionAddExpenseBegin,
+  actionAddExpenseSuccess,
+  actionAddExpenseFailure,
+  actionDeleteExpenseBegin,
+  actionDeleteExpenseFailure,
+  actionDeleteExpenseSuccess,
 } from './TypeExpense';
 
 export const URI_EXPENSES = 'http://localhost:5000/api/v1/expenses';
@@ -28,17 +31,30 @@ export const actionFetchExpenses = () => (dispatch) => {
 };
 
 export const actionAddExpense = (objExpense) => (dispatch) => {
-  dispatch(actionAddExpensesBegin());
+  dispatch(actionAddExpenseBegin());
   return axios
     .post(`${URI_EXPENSES}`, objExpense)
     .then((result) => {
-      return dispatch(actionAddExpensesSuccess(result.data));
+      return dispatch(actionAddExpenseSuccess(result.data));
+    })
+    .catch((error) => {
+      console.error(`Failed to add expense. ${error.message}`, 'ActionExpense');
+      return dispatch(actionAddExpenseFailure(error.message));
+    });
+};
+
+export const actionDeleteExpense = (strId) => (dispatch) => {
+  dispatch(actionDeleteExpenseBegin());
+  return axios
+    .delete(`${URI_EXPENSES}/${strId}`)
+    .then((result) => {
+      return dispatch(actionDeleteExpenseSuccess(result.data.strId));
     })
     .catch((error) => {
       console.error(
         `Failed to fetch expenses. ${error.message}`,
         'ActionExpense'
       );
-      return dispatch(actionAddExpensesFailure(error.message));
+      return dispatch(actionDeleteExpenseFailure(error.message));
     });
 };
