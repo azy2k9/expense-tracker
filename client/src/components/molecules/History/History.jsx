@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { v4 as uuidv4 } from 'uuid';
 import Wrapper from '../../../layouts/Wrapper/Wrapper';
 import Button from '../../atoms/Button/Button';
 import Title from '../../atoms/Title/Title';
+import { useSelector } from 'react-redux';
 
 const Container = styled.div`
   width: 50%;
@@ -28,32 +28,12 @@ const HistoryItem = styled.div`
   }
 `;
 
-const arrTransactions = [
-  {
-    strID: uuidv4(),
-    strTransaction: 'Car Lease',
-    price: 300,
-    strType: 'Expense',
-  },
-  {
-    strID: uuidv4(),
-    strTransaction: 'Mobile Contract',
-    price: 50,
-    strType: 'Expense',
-  },
-  {
-    strID: uuidv4(),
-    strTransaction: 'Savings',
-    price: 150,
-    strType: 'Income',
-  },
-];
-
 const History = () => {
+  const arrExpenses = useSelector((state) => state.ReducerExpense.arrExpenses);
   return (
     <Container>
       <Title>History</Title>
-      {arrTransactions.map((objTransaction) => (
+      {arrExpenses.map((objTransaction) => (
         <Wrapper>
           <HistoryItem
             key={objTransaction.strID}
