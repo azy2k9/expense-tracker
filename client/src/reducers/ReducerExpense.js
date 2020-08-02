@@ -1,45 +1,32 @@
-import { ADD_EXPENSE, DELETE_EXPENSE } from '../actions/ActionExpense';
-import { v4 as uuidv4 } from 'uuid';
+import { FETCH_EXPENSES_SUCCESS } from '../actions/TypeExpense';
 
 const initialState = {
-  arrExpenses: [
-    {
-      strID: uuidv4(),
-      strTransaction: 'Car Lease',
-      price: 300,
-      strType: 'Expense',
-    },
-    {
-      strID: uuidv4(),
-      strTransaction: 'Mobile Contract',
-      price: 50,
-      strType: 'Expense',
-    },
-    {
-      strID: uuidv4(),
-      strTransaction: 'Savings',
-      price: 150,
-      strType: 'Income',
-    },
-  ],
+  arrExpenses: [],
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case ADD_EXPENSE: {
-      const { objExpense } = action.payload;
+    // case ADD_EXPENSE: {
+    //   const { objExpense } = action.payload;
+    //   return {
+    //     ...state,
+    //     arrExpenses: [...state.arrExpenses, objExpense],
+    //   };
+    // }
+    // case DELETE_EXPENSE: {
+    //   const { id } = action.payload;
+    //   return {
+    //     ...state,
+    //     arrExpenses: state.arrExpenses.filter(
+    //       (objExpense) => objExpense.id !== id
+    //     ),
+    //   };
+    // }
+    case FETCH_EXPENSES_SUCCESS: {
+      const { arrExpenses } = action.payload;
       return {
         ...state,
-        arrExpenses: [...state.arrExpenses, objExpense],
-      };
-    }
-    case DELETE_EXPENSE: {
-      const { id } = action.payload;
-      return {
-        ...state,
-        arrExpenses: state.arrExpenses.filter(
-          (objExpense) => objExpense.id !== id
-        ),
+        arrExpenses,
       };
     }
     default:

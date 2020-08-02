@@ -1,14 +1,25 @@
-export const ADD_EXPENSE = 'ADD_EXPENSE';
-export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+import axios from 'axios';
 
-export const addExpense = (objExpense) => ({
-  type: ADD_EXPENSE,
-  payload: {
-    objExpense,
-  },
-});
+import {
+  actionFetchExpensesBegin,
+  actionFetchExpensesSuccess,
+  actionFetchExpensesFailure,
+} from './TypeExpense';
 
-export const deleteExpense = (id) => ({
-  type: DELETE_EXPENSE,
-  payload: { id },
-});
+export const URI_EXPENSES = 'http://localhost:5000/api/v1/expenses';
+
+export const actionFetchExpenses = () => (dispatch) => {
+  dispatch(actionFetchExpensesBegin());
+  return axios
+    .get(URI_EXPENSES)
+    .then((result) => {
+      return dispatch(actionFetchExpensesSuccess(result.data));
+    })
+    .catch((error) => {
+      console.error(
+        `Failed to fetch expenses. ${error.message}`,
+        'ActionExpense'
+      );
+      return dispatch(actionFetchExpensesFailure(error.message));
+    });
+};
