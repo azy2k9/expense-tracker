@@ -5,15 +5,15 @@ const Container = styled.button`
   margin: 0.5rem;
   padding: ${({ large }) => (large ? '1rem 2rem' : '0.5rem 1rem')};
   cursor: pointer;
-  background-color: white;
-  color: ${({ color }) => color};
+  background-color: ${({ disabled }) => (disabled ? 'grey' : 'white')};
+  color: ${({ color, disabled }) => (disabled ? 'white' : color)};
   transition: 0.1s all;
-  border-color: ${({ accent }) => accent};
+  border-color: ${({ accent, disabled }) => (disabled ? 'grey' : accent)};
   border-radius: 4px;
 
   &:hover {
     color: white;
-    background-color: ${({ accent }) => accent};
+    background-color: ${({ accent, disabled }) => (disabled ? '' : accent)};
   }
 
   &:active {

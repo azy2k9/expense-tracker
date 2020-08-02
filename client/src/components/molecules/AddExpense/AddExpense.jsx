@@ -7,6 +7,7 @@ import Radio from '../../atoms/Radio/Radio';
 import Button from '../../atoms/Button/Button';
 import { actionAddExpense } from '../../../actions/ActionExpense';
 import { useDispatch } from 'react-redux';
+import lodash from 'lodash';
 
 const Container = styled.div`
   width: 50%;
@@ -32,9 +33,12 @@ const AddExpense = () => {
           value={strName}
         />
         <Input
-          type="text"
+          type="number"
+          step="0.1"
           placeholder="Value (£)"
-          onChange={(e) => setStrPrice(e.target.value)}
+          onChange={(e) => {
+            setStrPrice(e.target.value);
+          }}
           value={strPrice}
         />
         <Wrapper strJustifyContent="center" strPadding="1rem">
@@ -73,7 +77,8 @@ const AddExpense = () => {
           }}
           color="#4c4"
           accent="#4c4"
-          large>
+          large
+          disabled={lodash.isEmpty(strName) || lodash.isEmpty(strPrice)}>
           Add
         </Button>
       </Wrapper>
