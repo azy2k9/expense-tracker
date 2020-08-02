@@ -36,8 +36,8 @@ const History = () => {
       {arrExpenses.map((objTransaction) => (
         <Wrapper key={objTransaction.strID}>
           <HistoryItem bExpense={objTransaction.strType === 'Expense'}>
-            <span>{objTransaction.strTransaction}</span>
-            <span>{objTransaction.price}</span>
+            <span>{objTransaction.strName}</span>
+            <span>{objTransaction.strPrice}</span>
           </HistoryItem>
           <Button color="red" accent="#F44336">
             Delete

@@ -11,7 +11,18 @@ const router = express.Router();
 router.get('/expenses', async (_, res) => {
   try {
     const expenses = await Expense.find();
-    res.json(expenses);
+
+    const arrExpenses = expenses.map((current) => {
+      const expense = {
+        strId: current._id,
+        strName: current.name,
+        strPrice: current.price,
+        strType: current.type,
+      };
+      return expense;
+    });
+
+    res.json(arrExpenses);
   } catch (error) {
     res
       .status(500)
@@ -36,7 +47,12 @@ router.get('/expenses/:id', async (req, res) => {
         .json({ message: 'Could not find any expense matching that id' });
     }
 
-    res.json(expense);
+    res.json({
+      strId: expense.id,
+      strName: expense.name,
+      strPrice: expense.price,
+      strType: expense.type,
+    });
   } catch (error) {
     res
       .status(500)
@@ -50,7 +66,12 @@ router.get('/expenses/:id', async (req, res) => {
 router.post('/expenses', async (req, res) => {
   try {
     const created = await Expense.create(req.body);
-    res.json(created);
+    res.json({
+      strId: created.id,
+      strName: created.name,
+      strPrice: created.price,
+      strType: created.type,
+    });
   } catch (error) {
     res
       .status(500)
@@ -77,7 +98,12 @@ router.patch('/expenses/:id', async (req, res) => {
 
     await expense.updateOne(req.body);
     const updated = await Expense.findById(id);
-    res.json(updated);
+    res.json({
+      strId: updated.id,
+      strName: updated.name,
+      strPrice: updated.price,
+      strType: updated.type,
+    });
   } catch (error) {
     res
       .status(500)

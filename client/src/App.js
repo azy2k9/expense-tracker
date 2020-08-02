@@ -12,7 +12,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(actionFetchExpenses());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Wrapper
