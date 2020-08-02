@@ -1,4 +1,7 @@
-import { FETCH_EXPENSES_SUCCESS } from '../actions/TypeExpense';
+import {
+  ADD_EXPENSES_SUCCESS,
+  FETCH_EXPENSES_SUCCESS,
+} from '../actions/TypeExpense';
 
 const initialState = {
   arrExpenses: [],
@@ -6,13 +9,13 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    // case ADD_EXPENSE: {
-    //   const { objExpense } = action.payload;
-    //   return {
-    //     ...state,
-    //     arrExpenses: [...state.arrExpenses, objExpense],
-    //   };
-    // }
+    case ADD_EXPENSES_SUCCESS: {
+      const { objExpense } = action.payload;
+      return {
+        ...state,
+        arrExpenses: [...state.arrExpenses, objExpense],
+      };
+    }
     // case DELETE_EXPENSE: {
     //   const { id } = action.payload;
     //   return {
