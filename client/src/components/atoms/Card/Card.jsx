@@ -22,7 +22,7 @@ const Card = ({ children }) => {
 };
 
 Card.propTypes = {
-  children: React.Component || PropTypes.arrayOf(React.Component).isRequired,
+  children: PropTypes.element || PropTypes.arrayOf(React.Component).isRequired,
 };
 
 export default Card;
