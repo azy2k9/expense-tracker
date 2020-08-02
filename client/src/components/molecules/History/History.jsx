@@ -34,10 +34,8 @@ const History = () => {
     <Container>
       <Title>History</Title>
       {arrExpenses.map((objTransaction) => (
-        <Wrapper>
-          <HistoryItem
-            key={objTransaction.strID}
-            bExpense={objTransaction.strType === 'Expense'}>
+        <Wrapper key={objTransaction.strID}>
+          <HistoryItem bExpense={objTransaction.strType === 'Expense'}>
             <span>{objTransaction.strTransaction}</span>
             <span>{objTransaction.price}</span>
           </HistoryItem>
