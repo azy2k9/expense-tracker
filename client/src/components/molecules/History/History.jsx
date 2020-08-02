@@ -35,23 +35,29 @@ const History = () => {
   return (
     <Container>
       <Title>History</Title>
-      {arrExpenses.map((objTransaction) => (
-        <Wrapper key={objTransaction.strId}>
-          <HistoryItem bExpense={objTransaction.strType === 'expense'}>
-            <span>{objTransaction.strName}</span>
-            <span>{objTransaction.strPrice}</span>
-          </HistoryItem>
-          <Button
-            onClick={() => {
-              dispatch(actionDeleteExpense(objTransaction.strId));
-            }}
-            key={objTransaction.strId}
-            color="red"
-            accent="#F44336">
-            Delete
-          </Button>
+      {arrExpenses.length ? (
+        arrExpenses.map((objTransaction) => (
+          <Wrapper key={objTransaction.strId}>
+            <HistoryItem bExpense={objTransaction.strType === 'expense'}>
+              <span>{objTransaction.strName}</span>
+              <span>{objTransaction.strPrice}</span>
+            </HistoryItem>
+            <Button
+              onClick={() => {
+                dispatch(actionDeleteExpense(objTransaction.strId));
+              }}
+              key={objTransaction.strId}
+              color="red"
+              accent="#F44336">
+              Delete
+            </Button>
+          </Wrapper>
+        ))
+      ) : (
+        <Wrapper strJustifyContent="center">
+          You have no expense History!
         </Wrapper>
-      ))}
+      )}
     </Container>
   );
 };
