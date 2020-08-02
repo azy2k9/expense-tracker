@@ -75,7 +75,7 @@ router.post('/expenses', async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: `Could not create expense. ${error.reason}` });
+      .json({ message: `Could not create expense. ${error.message}` });
   }
 });
 
