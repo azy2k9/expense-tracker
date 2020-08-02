@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  padding: 16px;
-  margin: 16px;
+  padding: 1rem;
+  margin: 1rem;
   text-align: center;
   width: 60%;
   background-color: white;

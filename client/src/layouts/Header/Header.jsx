@@ -7,7 +7,7 @@ const Container = styled.div`
   justify-content: center;
   font-size: 3rem;
   font-weight: bold;
-  padding: 36px 0px;
+  padding: 2rem 0px;
 `;
 
 const Header = ({ children }) => {

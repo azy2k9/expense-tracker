@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Container = styled.div`
-  padding: 0px 8px;
+  padding: 0 0.5rem;
 `;
 
 const Input = styled.input`

@@ -8,8 +8,8 @@ import Button from '../../atoms/Button/Button';
 
 const Container = styled.div`
   width: 50%;
-  margin: 16px;
-  padding: 16px;
+  margin: 1rem;
+  padding: 1rem;
 `;
 
 const AddExpense = () => {
@@ -21,7 +21,7 @@ const AddExpense = () => {
       <Wrapper strDirection="column">
         <Input type="text" placeholder="Name" />
         <Input type="text" placeholder="Value (£)" />
-        <Wrapper strJustifyContent="center" strPadding="16px">
+        <Wrapper strJustifyContent="center" strPadding="1rem">
           <Radio
             strId="income"
             strName="expense-type"

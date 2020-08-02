@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Container = styled.input`
   padding: 1.2rem;
-  margin: ${({ type }) => (type === 'text' ? '8px' : '')};
+  margin: ${({ type }) => (type === 'text' ? '0.5rem' : '')};
   outline: none;
   border: 1px solid black;
   border-radius: 4px;

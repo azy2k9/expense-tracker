@@ -7,17 +7,17 @@ import { useSelector } from 'react-redux';
 
 const Container = styled.div`
   width: 50%;
-  margin: 16px;
-  padding: 16px;
+  margin: 1rem;
+  padding: 1rem;
 `;
 
 const HistoryItem = styled.div`
-  display: flex !important;
-  padding: 24px !important;
-  margin: 8px !important;
-  justify-content: space-between !important;
-  width: 100% !important;
-  border-right: 5px solid ${({ bExpense }) => (bExpense ? 'green' : 'red')} !important;
+  display: flex;
+  padding: 1.5rem;
+  margin: 0.5rem;
+  justify-content: space-between;
+  width: 100%;
+  border-right: 0.3rem solid ${({ bExpense }) => (bExpense ? 'green' : 'red')};
   background-color: white;
   border-radius: 4px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 const Container = styled.div`
   border-bottom: 1px solid black;
-  padding: 10px 0px;
-  margin-bottom: 20px;
+  padding: 0.5rem 0;
+  margin-bottom: 1.5rem;
 `;
 
 const Title = ({ children }) => {
