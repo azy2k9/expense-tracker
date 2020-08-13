@@ -8,6 +8,7 @@ import Button from '../../atoms/Button/Button';
 import { actionAddExpense } from '../../../actions/ActionExpense';
 import { useDispatch } from 'react-redux';
 import lodash from 'lodash';
+import moment from 'moment';
 
 const Container = styled.div`
   width: 50%;
@@ -19,6 +20,7 @@ const AddExpense = () => {
   const [strName, setStrName] = useState(null);
   const [strPrice, setStrPrice] = useState(null);
   const [strType, setStrType] = useState('income');
+  const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
 
   const dispatch = useDispatch();
 
@@ -40,6 +42,13 @@ const AddExpense = () => {
             setStrPrice(e.target.value);
           }}
           value={strPrice}
+        />
+        <Input
+          type="date"
+          onChange={(e) => {
+            setDate(e.target.value);
+          }}
+          value={date}
         />
         <Wrapper strJustifyContent="center" strPadding="1rem">
           <Radio
@@ -65,6 +74,7 @@ const AddExpense = () => {
               name: strName,
               price: strPrice,
               type: strType,
+              date,
             };
 
             dispatch(
@@ -72,13 +82,18 @@ const AddExpense = () => {
                 setStrName('');
                 setStrPrice('');
                 setStrType('income');
+                setDate(moment().format('YYYY-MM-DD'));
               })
             );
           }}
           color="#4c4"
           accent="#4c4"
           large
-          disabled={lodash.isEmpty(strName) || lodash.isEmpty(strPrice)}>
+          disabled={
+            lodash.isEmpty(strName) ||
+            lodash.isEmpty(strPrice) ||
+            !moment(date).isValid()
+          }>
           Add
         </Button>
       </Wrapper>
