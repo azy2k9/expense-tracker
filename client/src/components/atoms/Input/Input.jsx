@@ -4,8 +4,7 @@ import styled from 'styled-components';
 
 const Container = styled.input`
   padding: 1.2rem;
-  margin: ${({ type }) =>
-    type === 'text' || type === 'number' ? '0.5rem' : ''};
+  margin: 0.5rem;
   border: 1px solid black;
   border-radius: 4px;
 
