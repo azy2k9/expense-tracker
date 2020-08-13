@@ -18,6 +18,7 @@ router.get('/expenses', async (_, res) => {
         strName: current.name,
         strPrice: current.price,
         strType: current.type,
+        strDate: current.date,
       };
       return expense;
     });
@@ -52,6 +53,7 @@ router.get('/expenses/:id', async (req, res) => {
       strName: expense.name,
       strPrice: expense.price,
       strType: expense.type,
+      strDate: expense.date,
     });
   } catch (error) {
     res
@@ -71,6 +73,7 @@ router.post('/expenses', async (req, res) => {
       strName: created.name,
       strPrice: created.price,
       strType: created.type,
+      strDate: created.date,
     });
   } catch (error) {
     res
@@ -103,6 +106,7 @@ router.patch('/expenses/:id', async (req, res) => {
       strName: updated.name,
       strPrice: updated.price,
       strType: updated.type,
+      strDate: updated.date,
     });
   } catch (error) {
     res
