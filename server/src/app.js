@@ -8,6 +8,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const expenses = require('./routes/expenses');
+const balance = require('./routes/balance');
 
 const app = express();
 
@@ -31,6 +32,8 @@ app.get('/', (req, res) => {
   });
 });
 
+//Setup routes
 app.use('/api/v1', expenses);
+app.use('/api/v1', balance);
 
 module.exports = app;
