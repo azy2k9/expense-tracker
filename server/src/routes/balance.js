@@ -27,4 +27,56 @@ router.get('/balance', async (_, res) => {
   }
 });
 
+/**
+ * [GET] Get total income
+ */
+router.get('/balance/income', async (_, res) => {
+  try {
+    const income = await Expense.aggregate()
+      .match({
+        type: 'income',
+      })
+      .group({
+        _id: '$type',
+        total: { $sum: '$price' },
+      });
+
+    const totalIncome = income.reduce((acc, current) => {
+      return acc + current.total;
+    }, 0);
+
+    res.json(totalIncome);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: `Could not get total income. ${error.reason}` });
+  }
+});
+
+/**
+ * [GET] Get total expense
+ */
+router.get('/balance/expense', async (_, res) => {
+  try {
+    const expense = await Expense.aggregate()
+      .match({
+        type: 'expense',
+      })
+      .group({
+        _id: '$type',
+        total: { $sum: '$price' },
+      });
+
+    const totalExpense = expense.reduce((acc, current) => {
+      return acc + current.total;
+    }, 0);
+
+    res.json(totalExpense);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: `Could not get total expense. ${error.reason}` });
+  }
+});
+
 module.exports = router;
