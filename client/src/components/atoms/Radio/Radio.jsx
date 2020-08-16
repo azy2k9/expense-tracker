@@ -43,7 +43,7 @@ const Label = styled.label`
 
 const Radio = ({
   bChecked = false,
-  onClick,
+  onChange,
   strLabel,
   strId,
   strValue,
@@ -58,7 +58,7 @@ const Radio = ({
         id={strId}
         value={strValue}
         name={strName}
-        onClick={onClick}
+        onChange={onChange}
       />
       <Label htmlFor={strId}>{strLabel}</Label>
     </Container>
@@ -71,7 +71,7 @@ Radio.defaultProps = {
 
 Radio.propTypes = {
   bChecked: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   strLabel: PropTypes.string.isRequired,
   strId: PropTypes.string.isRequired,
   strValue: PropTypes.string.isRequired,

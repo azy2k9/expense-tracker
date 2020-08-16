@@ -17,8 +17,8 @@ const Container = styled.div`
 `;
 
 const AddExpense = () => {
-  const [strName, setStrName] = useState(null);
-  const [strPrice, setStrPrice] = useState(null);
+  const [strName, setStrName] = useState('');
+  const [strPrice, setStrPrice] = useState('');
   const [strType, setStrType] = useState('income');
   const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
 
@@ -56,7 +56,7 @@ const AddExpense = () => {
             strName="expense-type"
             strValue="income"
             strLabel="Income"
-            onClick={(event) => setStrType(event.target.value)}
+            onChange={(event) => setStrType(event.target.value)}
             bChecked={strType === 'income'}
           />
           <Radio
@@ -64,7 +64,7 @@ const AddExpense = () => {
             strName="expense-type"
             strValue="expense"
             strLabel="Expense"
-            onClick={(event) => setStrType(event.target.value)}
+            onChange={(event) => setStrType(event.target.value)}
             bChecked={strType === 'expense'}
           />
         </Wrapper>

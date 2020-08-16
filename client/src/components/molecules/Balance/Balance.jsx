@@ -47,14 +47,14 @@ const Balance = () => {
         strAlignItems="center">
         <Wrapper>
           <Wrapper strDirection="column">
-            <StatHeader>BALANCE</StatHeader>
-            <Stat>£{strBalance}</Stat>
+            <StatHeader>INCOME</StatHeader>
+            <Income>£{strIncome}</Income>
           </Wrapper>
         </Wrapper>
         <Wrapper>
           <Wrapper strDirection="column">
-            <StatHeader>INCOME</StatHeader>
-            <Income>£{strIncome}</Income>
+            <StatHeader>BALANCE</StatHeader>
+            <Stat>£{strBalance}</Stat>
           </Wrapper>
         </Wrapper>
         <Wrapper>
