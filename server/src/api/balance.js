@@ -1,7 +1,6 @@
 const express = require('express');
 
 const Expense = require('../models/Expense');
-const extract = require('../utils/extract');
 
 const router = express.Router();
 
