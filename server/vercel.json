@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.js",
+      "use": "@now/node-server"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/.*",
+      "dest": "src/index.js"
+    }
+  ],
+  "alias": ["expense-tracker"],
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "1337",
+    "DATABASE_URL": "@expense-tracker-db",
+    "CORS_ORIGIN": ""
+  }
+}

@@ -12,7 +12,7 @@ import {
   actionDeleteExpenseSuccess,
 } from './TypeExpense';
 
-export const URI_EXPENSES = 'http://localhost:5000/api/v1/expenses';
+export const URI_EXPENSES = `${process.env.REACT_APP_HOST}/api/v1/expenses`;
 
 export const actionFetchExpenses = () => (dispatch) => {
   dispatch(actionFetchExpensesBegin());

@@ -14,7 +14,7 @@ const auth = require('./api/auth');
 const app = express();
 
 mongoose.connect(
-  process.env.MONGO_URI,
+  process.env.DATABASE_URL,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
