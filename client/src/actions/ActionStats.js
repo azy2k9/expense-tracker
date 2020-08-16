@@ -13,7 +13,7 @@ import {
 } from './TypeStats';
 
 const strHost =
-  process.env.REACT_APP_MODE === 'development'
+  process.env.NODE_ENV === 'development'
     ? process.env.REACT_APP_HOST_LOCALHOST
     : process.env.REACT_APP_HOST;
 
