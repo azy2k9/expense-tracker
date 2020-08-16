@@ -12,7 +12,12 @@ import {
   actionDeleteExpenseSuccess,
 } from './TypeExpense';
 
-export const URI_EXPENSES = `${process.env.REACT_APP_HOST}/api/v1/expenses`;
+const strHost =
+  process.env.NODE_ENV === 'development'
+    ? process.env.REACT_APP_HOST_LOCALHOST
+    : process.env.REACT_APP_HOST;
+
+export const URI_EXPENSES = `${strHost}/api/v1/expenses`;
 
 export const actionFetchExpenses = () => (dispatch) => {
   dispatch(actionFetchExpensesBegin());

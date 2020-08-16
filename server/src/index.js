@@ -14,7 +14,9 @@ const auth = require('./api/auth');
 const app = express();
 
 mongoose.connect(
-  process.env.DATABASE_URL,
+  process.env.NODE_ENV === 'development'
+    ? process.env.DATABASE_URL_LOCALHOST
+    : process.env.DATABASE_URL,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -26,9 +28,13 @@ app.use(morgan('dev'));
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
+    origin:
+      process.env.NODE_ENV === 'development'
+        ? process.env.CORS_ORIGIN_LOCALHOST
+        : process.env.CORS_ORIGIN,
   })
 );
+
 app.use(express.json());
 
 app.get('/', (req, res) => {

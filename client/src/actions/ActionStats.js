@@ -12,7 +12,12 @@ import {
   actionFetchExpenseSuccess,
 } from './TypeStats';
 
-export const URI_BALANCE = `${process.env.REACT_APP_HOST}/api/v1/stats`;
+const strHost =
+  process.env.REACT_APP_MODE === 'development'
+    ? process.env.REACT_APP_HOST_LOCALHOST
+    : process.env.REACT_APP_HOST;
+
+export const URI_BALANCE = `${strHost}/api/v1/stats`;
 
 export const actionFetchBalance = () => (dispatch) => {
   dispatch(actionFetchBalanceBegin());
