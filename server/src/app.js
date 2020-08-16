@@ -7,8 +7,8 @@ const cors = require('cors');
 
 require('dotenv').config();
 
-const expenses = require('./routes/expenses');
-const balance = require('./routes/balance');
+const expenses = require('./api/expenses');
+const balance = require('./api/balance');
 
 const app = express();
 
