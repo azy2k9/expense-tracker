@@ -8,7 +8,7 @@ const router = express.Router();
 /**
  * [GET] Get balance
  */
-router.get('/balance', async (_, res) => {
+router.get('/stats/balance', async (_, res) => {
   try {
     const totals = await Expense.aggregate().group({
       _id: '$type',
@@ -30,7 +30,7 @@ router.get('/balance', async (_, res) => {
 /**
  * [GET] Get total income
  */
-router.get('/balance/income', async (_, res) => {
+router.get('/stats/income', async (_, res) => {
   try {
     const income = await Expense.aggregate()
       .match({
@@ -56,7 +56,7 @@ router.get('/balance/income', async (_, res) => {
 /**
  * [GET] Get total expense
  */
-router.get('/balance/expense', async (_, res) => {
+router.get('/stats/expense', async (_, res) => {
   try {
     const expense = await Expense.aggregate()
       .match({
