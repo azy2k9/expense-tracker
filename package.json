@@ -2,7 +2,6 @@
   "name": "expense-tracker",
   "version": "1.0.0",
   "description": "A simple expense tracking app",
-  "main": "index.js",
   "scripts": {
     "start:client": "cd client && npm start",
     "start:server": "cd server && npm run dev",
@@ -22,5 +21,8 @@
   "homepage": "https://github.com/azy2k9/expense-tracker#readme",
   "devDependencies": {
     "concurrently": "^5.2.0"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0"
   }
 }

@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
-const mongoose = require('mongoose');
+const database = require('./database');
 
 const cors = require('cors');
 
@@ -13,16 +13,7 @@ const auth = require('./api/auth');
 
 const app = express();
 
-mongoose.connect(
-  process.env.NODE_ENV === 'development'
-    ? process.env.DATABASE_URL_LOCALHOST
-    : process.env.DATABASE_URL,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  () => console.log('Successfully connected to DB...')
-);
+database.connect();
 
 app.use(morgan('dev'));
 app.use(helmet());
@@ -48,8 +39,4 @@ app.use('/api/v1', expenses);
 app.use('/api/v1', balance);
 app.use('/api/v1/auth', auth);
 
-const port = process.env.PORT || 5000;
-
-app.listen(port, () => {
-  console.log(`Listening: http://localhost:${port}`);
-});
+module.exports = app;
