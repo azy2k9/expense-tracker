@@ -11,6 +11,7 @@ module.exports = {
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useCreateIndex: true,
       },
       () => console.log('Successfully connected to DB...')
     );

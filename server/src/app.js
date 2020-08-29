@@ -10,6 +10,7 @@ require('dotenv').config();
 const expenses = require('./api/expenses');
 const balance = require('./api/balance');
 const auth = require('./api/auth');
+const { protect } = require('./utils/jwt');
 
 const app = express();
 
@@ -35,8 +36,9 @@ app.get('/', (req, res) => {
 });
 
 //Setup routes
+app.use('/auth', auth);
+app.use('/api/v1', protect);
 app.use('/api/v1', expenses);
 app.use('/api/v1', balance);
-app.use('/api/v1/auth', auth);
 
 module.exports = app;
