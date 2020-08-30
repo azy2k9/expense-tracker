@@ -9,7 +9,7 @@ const newToken = (user) => {
 };
 
 const verifyToken = async (token) => {
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     jwt.verify(token, process.env.JWT, (err, payload) => {
       if (err) return reject(err);
       resolve(payload);
@@ -37,7 +37,7 @@ const protect = async (req, res, next) => {
     .lean()
     .exec();
 
-  if (!lodash.isEmpty(user)) {
+  if (lodash.isEmpty(user)) {
     return res.status(401).send({ err: 'user not found' });
   }
 

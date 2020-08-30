@@ -37,7 +37,7 @@ router.post('/login', async (req, res) => {
   }
 
   try {
-    const user = await User.findOne({ email }).exec();
+    const user = await User.findOne({ email }).select('email password').exec();
 
     if (lodash.isEmpty(user)) {
       return res

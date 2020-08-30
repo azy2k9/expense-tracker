@@ -18,6 +18,7 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    expenses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Expense' }],
   },
   { timestamps: true }
 );

@@ -10,7 +10,9 @@ const router = express.Router();
  */
 router.get('/expenses', async (_, res) => {
   try {
-    const expenses = await Expense.find();
+    const expenses = await Expense.find({
+      where: { created_by: req.user._id },
+    });
 
     const arrExpenses = expenses.map((current) => {
       const expense = {
@@ -67,7 +69,11 @@ router.get('/expenses/:id', async (req, res) => {
  */
 router.post('/expenses', async (req, res) => {
   try {
-    const created = await Expense.create(req.body);
+    const created = await Expense.create({
+      ...req.body,
+      created_by: req.user._id,
+    });
+
     res.json({
       strId: created.id,
       strName: created.name,
