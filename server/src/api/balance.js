@@ -20,9 +20,9 @@ router.get('/stats/balance', async (_, res) => {
         : accumulatedBalance + current.total;
     }, 0);
 
-    res.json(balance);
+    res.json({ data: balance });
   } catch (error) {
-    res.status(500).json({ message: `Could not get balance. ${error.reason}` });
+    res.status(500).json({ error: `Could not get balance. ${error.reason}` });
   }
 });
 
@@ -48,7 +48,7 @@ router.get('/stats/income', async (_, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: `Could not get total income. ${error.reason}` });
+      .json({ error: `Could not get total income. ${error.reason}` });
   }
 });
 
@@ -74,7 +74,7 @@ router.get('/stats/expense', async (_, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: `Could not get total expense. ${error.reason}` });
+      .json({ error: `Could not get total expense. ${error.reason}` });
   }
 });
 

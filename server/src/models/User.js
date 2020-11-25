@@ -18,7 +18,7 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    expenses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Expense' }],
+    expenses: [{ type: Schema.Types.ObjectId, ref: 'Expense' }],
   },
   { timestamps: true }
 );
@@ -35,4 +35,4 @@ UserSchema.methods.verifyPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = User = mongoose.model('User', UserSchema);

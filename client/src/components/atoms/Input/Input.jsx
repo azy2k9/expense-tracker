@@ -1,12 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Wrapper from '../../../layouts/Wrapper';
 
-const Container = styled.input`
+const InputContainer = styled.input`
   padding: 1.2rem;
+  width: ${({ strWidth }) => strWidth};
+  ${({ adornment }) =>
+    adornment
+      ? `
+    margin: 0.5rem 0rem;
+    border-top: 1px;
+    border-bottom: 1px;
+    border-right: 1px;
+    border-left: 0px;
+    border-color: black;
+    border-style: solid;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  `
+      : `
   margin: 0.5rem;
   border: 1px solid black;
   border-radius: 4px;
+  `};
 
   &:hover {
     transition: 0.2s box-shadow;
@@ -25,17 +42,50 @@ const Container = styled.input`
   }
 `;
 
+const Adornment = styled.div`
+  width: 2rem;
+  height: 2rem;
+  padding: 1.2rem 1rem;
+  margin: 0.5rem 0rem;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  background-color: lightgrey;
+  border-top: 1px;
+  border-bottom: 1px;
+  border-left: 1px;
+  border-right: 0px;
+  border-color: black;
+  border-style: solid;
+`;
+
 const Input = (props) => {
-  return <Container {...props} />;
+  if (props.adornment) {
+    return (
+      <Wrapper>
+        {props.adornment && <Adornment>{props.adornment}</Adornment>}
+        <InputContainer {...props} />
+      </Wrapper>
+    );
+  }
+
+  return (
+    <>
+      <InputContainer {...props} />
+    </>
+  );
 };
 
 Input.defaultProps = {
   placeholder: 'Name',
+  strWidth: '',
+  adornment: null,
 };
 
 Input.propTypes = {
+  adornment: PropTypes.node,
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
+  strWidth: PropTypes.string,
 };
 
 export default Input;

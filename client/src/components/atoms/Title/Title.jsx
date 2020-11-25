@@ -13,7 +13,7 @@ const Title = ({ children }) => {
 };
 
 Title.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.string || PropTypes.arrayOf(PropTypes.node),
 };
 
 export default Title;

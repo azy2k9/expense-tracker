@@ -20,7 +20,7 @@ const App = () => {
       strJustifyContent="center"
       strAlignItems="center">
       <Header>Expense Tracker</Header>
-      <Balance />
+      {/* <Balance /> */}
       <History />
       <AddExpense />
     </Wrapper>

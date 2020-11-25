@@ -12,6 +12,10 @@ const Container = styled.div`
   align-content: ${({ strAlignContent }) => strAlignContent};
   align-self: ${({ strAlignSelf }) => strAlignSelf};
   padding: ${({ strPadding }) => strPadding};
+  min-height: ${({ bFullscreen, remFullscreenOffset }) =>
+    bFullscreen && `calc(100vh - ${remFullscreenOffset}rem);`};
+  min-width: ${({ bFullscreen }) => bFullscreen && '100vw'};
+  text-align: center;
 `;
 
 const Wrapper = (props) => {
@@ -27,9 +31,13 @@ Wrapper.defaultProps = {
   strAlignContent: '',
   strAlignSelf: '',
   strPadding: '',
+  remFullscreenOffset: 0,
+  bFullscreen: false,
 };
 
 Wrapper.propTypes = {
+  bFullscreen: PropTypes.bool,
+  remFullscreenOffset: PropTypes.number,
   strDirection: PropTypes.string,
   strJustifyContent: PropTypes.string,
   strJustifyItems: PropTypes.string,

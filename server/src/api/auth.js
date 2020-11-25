@@ -13,16 +13,17 @@ router.post('/register', async (req, res) => {
   if (lodash.isNil(email) || lodash.isNil(password)) {
     return res
       .status(422)
-      .json({ message: 'You must provide an email and password' });
+      .json({ error: 'You must provide an email and password' });
   }
 
   try {
     const doc = await User.create({ email, password });
     const token = newToken(doc);
-    return res.status(201).send({ token });
+    return res.status(201).send({ data: token });
   } catch (error) {
-    console.error(error);
-    return res.status(400).json({ error });
+    const errorMessage =
+      error.code === 11000 ? 'Email already has an account' : error;
+    return res.status(400).json({ error: errorMessage });
   }
 });
 
@@ -33,7 +34,7 @@ router.post('/login', async (req, res) => {
   if (lodash.isNil(email) || lodash.isNil(password)) {
     return res
       .status(422)
-      .json({ message: 'You must provide an email and password' });
+      .json({ error: 'You must provide an email and password' });
   }
 
   try {
@@ -42,20 +43,21 @@ router.post('/login', async (req, res) => {
     if (lodash.isEmpty(user)) {
       return res
         .status(400)
-        .json({ message: 'No user found matching the credentials provided' });
+        .json({ error: 'No user found matching the credentials provided' });
     }
 
     const match = await user.verifyPassword(password);
 
     if (!match) {
-      return res.status(401).json({ err: 'Incorrect password' });
+      return res.status(401).json({ error: 'Incorrect password' });
     }
 
     const token = newToken(user);
-    return res.status(201).send({ token });
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json({ err });
+    return res.status(201).send({ data: token });
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ error: 'Could not login with the credentials provided' });
   }
 });
 

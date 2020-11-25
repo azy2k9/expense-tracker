@@ -8,28 +8,40 @@ const router = express.Router();
 /**
  * [GET] Get all expenses
  */
-router.get('/expenses', async (_, res) => {
+router.get('/expenses', async (req, res) => {
+  console.log('User ', req.user.id);
   try {
     const expenses = await Expense.find({
-      where: { created_by: req.user._id },
-    });
+      // where: { created_by: req.user.id },
+    }).exec();
 
-    const arrExpenses = expenses.map((current) => {
-      const expense = {
-        strId: current._id,
-        strName: current.name,
-        strPrice: current.price,
-        strType: current.type,
-        strDate: current.date,
-      };
-      return expense;
-    });
+    // const exp = await Expense.find({
+    //   where: { created_by: req.user },
+    // }).exec();
+    console.log('Expenses ', expenses);
 
-    res.json(arrExpenses);
+    // console.log(
+    //   await Expense.find({ where: { created_by: req.user._id } }).exec()
+    // );
+    // console.log(
+    //   await Expense.find({
+    //     where: { created_by: '5f4ab5fefa7d8c75050f8d17' },
+    //   }).exec()
+    // );
+
+    // console.log(exp[13].created_by);
+    const arrExpenses = expenses.map((current) => ({
+      strId: current._id,
+      strName: current.name,
+      strPrice: current.price,
+      strType: current.type,
+      strDate: current.date,
+    }));
+
+    res.json({ data: arrExpenses });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: `Could not get expenses. ${error.reason}` });
+    console.log(error);
+    res.status(500).json({ error: `Could not get expenses. ${error.reason}` });
   }
 });
 
@@ -40,14 +52,14 @@ router.get('/expenses/:id', async (req, res) => {
   try {
     const id = extract(req.params, 'id');
     if (!id) {
-      return res.status(400).json({ message: 'Missing Parameters' });
+      return res.status(400).json({ error: 'Missing Parameters' });
     }
 
     const expense = await Expense.findById(id);
     if (!expense) {
       res
         .status(404)
-        .json({ message: 'Could not find any expense matching that id' });
+        .json({ error: 'Could not find any expense matching that id' });
     }
 
     res.json({
@@ -58,9 +70,7 @@ router.get('/expenses/:id', async (req, res) => {
       strDate: expense.date,
     });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: `Could not get expenses. ${error.reason}` });
+    res.status(500).json({ error: `Could not get expenses. ${error.reason}` });
   }
 });
 
@@ -84,7 +94,7 @@ router.post('/expenses', async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: `Could not create expense. ${error.message}` });
+      .json({ error: `Could not create expense. ${error.message}` });
   }
 });
 
@@ -95,14 +105,14 @@ router.patch('/expenses/:id', async (req, res) => {
   try {
     const id = extract(req.params, 'id');
     if (!id) {
-      return res.status(400).json({ message: 'Missing Parameters' });
+      return res.status(400).json({ error: 'Missing Parameters' });
     }
 
     const expense = await Expense.findById(id);
     if (!expense) {
       res
         .status(404)
-        .json({ message: `Could not find any expense matching that id.` });
+        .json({ error: `Could not find any expense matching that id.` });
     }
 
     await expense.updateOne(req.body);
@@ -115,9 +125,7 @@ router.patch('/expenses/:id', async (req, res) => {
       strDate: updated.date,
     });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: `Could not get expenses. ${error.reason}` });
+    res.status(500).json({ error: `Could not get expenses. ${error.reason}` });
   }
 });
 
@@ -128,22 +136,22 @@ router.delete('/expenses/:id', async (req, res) => {
   try {
     const id = extract(req.params, 'id');
     if (!id) {
-      return res.status(400).json({ message: 'Missing Parameters' });
+      return res.status(400).json({ error: 'Missing Parameters' });
     }
 
     const expense = await Expense.findById(id);
     if (!expense) {
       res
         .status(404)
-        .json({ message: `Could not find any expense matching that id.` });
+        .json({ error: `Could not find any expense matching that id.` });
     }
 
     await expense.deleteOne();
-    res.json({ strId: id });
+    res.json({ data: id });
   } catch (error) {
     res
       .status(500)
-      .json({ message: `Could not delete expense. ${error.reason}` });
+      .json({ error: `Could not delete expense. ${error.reason}` });
   }
 });
 

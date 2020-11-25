@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { instance as axios } from '../instance';
 
 import {
   actionFetchExpensesBegin,
@@ -12,26 +12,18 @@ import {
   actionDeleteExpenseSuccess,
 } from './TypeExpense';
 
-const strHost =
-  process.env.NODE_ENV === 'development'
-    ? process.env.REACT_APP_HOST_LOCALHOST
-    : process.env.REACT_APP_HOST;
-
-export const URI_EXPENSES = `${strHost}/api/v1/expenses`;
+export const URI_EXPENSES = `/api/v1/expenses`;
 
 export const actionFetchExpenses = () => (dispatch) => {
   dispatch(actionFetchExpensesBegin());
   return axios
     .get(URI_EXPENSES)
-    .then((result) => {
-      return dispatch(actionFetchExpensesSuccess(result.data));
+    .then(({ data }) => {
+      return dispatch(actionFetchExpensesSuccess(data));
     })
-    .catch((error) => {
-      console.error(
-        `Failed to fetch expenses. ${error.message}`,
-        'ActionExpense'
-      );
-      return dispatch(actionFetchExpensesFailure(error.message));
+    .catch(({ error }) => {
+      console.error(`Failed to fetch expenses. ${error}`, 'ActionExpense');
+      return dispatch(actionFetchExpensesFailure(error));
     });
 };
 
@@ -41,13 +33,13 @@ export const actionAddExpense = (objExpense, onSuccessCallback = () => {}) => (
   dispatch(actionAddExpenseBegin());
   return axios
     .post(`${URI_EXPENSES}`, objExpense)
-    .then((result) => {
+    .then(({ data }) => {
       onSuccessCallback();
-      return dispatch(actionAddExpenseSuccess(result.data));
+      return dispatch(actionAddExpenseSuccess(data));
     })
-    .catch((error) => {
-      console.error(`Failed to add expense. ${error.message}`, 'ActionExpense');
-      return dispatch(actionAddExpenseFailure(error.message));
+    .catch(({ error }) => {
+      console.error(`Failed to add expense. ${error}`, 'ActionExpense');
+      return dispatch(actionAddExpenseFailure(error));
     });
 };
 
@@ -55,14 +47,11 @@ export const actionDeleteExpense = (strId) => (dispatch) => {
   dispatch(actionDeleteExpenseBegin());
   return axios
     .delete(`${URI_EXPENSES}/${strId}`)
-    .then((result) => {
-      return dispatch(actionDeleteExpenseSuccess(result.data.strId));
+    .then(({ data }) => {
+      return dispatch(actionDeleteExpenseSuccess(data));
     })
-    .catch((error) => {
-      console.error(
-        `Failed to fetch expenses. ${error.message}`,
-        'ActionExpense'
-      );
-      return dispatch(actionDeleteExpenseFailure(error.message));
+    .catch(({ error }) => {
+      console.error(`Failed to fetch expenses. ${error}`, 'ActionExpense');
+      return dispatch(actionDeleteExpenseFailure(error));
     });
 };
