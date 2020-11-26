@@ -1,0 +1,8 @@
+NODE_ENV=development
+PORT=5000
+DATABASE_URL=mongodb+srv://azy2k9:azy2k9azy2k9@expensetracker.6zi67.mongodb.net/ExpenseTracker?retryWrites=true&w=majority
+DATABASE_URL_LOCALHOST=mongodb://localhost/expenses
+CORS_ORIGIN=https://expense-tracker-client.azy2k9.vercel.app/
+CORS_ORIGIN_LOCALHOST=http://localhost:3000
+JWT=ijustwannasavemoney
+JWTEXP=1d
