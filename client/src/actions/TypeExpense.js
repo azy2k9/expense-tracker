@@ -46,7 +46,10 @@ export const DELETE_EXPENSES_ERROR = 'DELETE_EXPENSES_ERROR';
 export const DELETE_EXPENSES_BEGIN = 'DELETE_EXPENSES_BEGIN';
 export const DELETE_EXPENSES_SUCCESS = 'DELETE_EXPENSES_SUCCESS';
 
-export const actionDeleteExpenseBegin = () => ({
+export const actionDeleteExpenseBegin = (strId) => ({
+  payload: {
+    strId,
+  },
   type: DELETE_EXPENSES_BEGIN,
 });
 

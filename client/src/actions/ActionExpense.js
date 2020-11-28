@@ -14,9 +14,9 @@ import {
 
 export const URI_EXPENSES = `/api/v1/expenses`;
 
-export const actionFetchExpenses = () => (dispatch) => {
+export const actionFetchExpenses = () => async (dispatch) => {
   dispatch(actionFetchExpensesBegin());
-  return axios
+  return await axios
     .get(URI_EXPENSES)
     .then(({ data }) => {
       return dispatch(actionFetchExpensesSuccess(data));
@@ -27,11 +27,11 @@ export const actionFetchExpenses = () => (dispatch) => {
     });
 };
 
-export const actionAddExpense = (objExpense, onSuccessCallback = () => {}) => (
+export const actionAddExpense = (objExpense, onSuccessCallback = () => {}) => async (
   dispatch
 ) => {
   dispatch(actionAddExpenseBegin());
-  return axios
+  return await axios
     .post(`${URI_EXPENSES}`, objExpense)
     .then(({ data }) => {
       onSuccessCallback();
@@ -43,9 +43,9 @@ export const actionAddExpense = (objExpense, onSuccessCallback = () => {}) => (
     });
 };
 
-export const actionDeleteExpense = (strId) => (dispatch) => {
+export const actionDeleteExpense = (strId) => async (dispatch) => {
   dispatch(actionDeleteExpenseBegin());
-  return axios
+  return await axios
     .delete(`${URI_EXPENSES}/${strId}`)
     .then(({ data }) => {
       return dispatch(actionDeleteExpenseSuccess(data));

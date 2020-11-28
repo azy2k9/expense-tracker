@@ -11,9 +11,9 @@ import {
 
 export const URI_AUTH = `/auth`;
 
-export const actionLogin = (objUserCredentials) => (dispatch) => {
+export const actionLogin = (objUserCredentials) => async (dispatch) => {
   dispatch(actionLoginBegin());
-  return axios
+  return await axios
     .post(`${URI_AUTH}/login`, objUserCredentials)
     .then(({ data }) => {
       setToken(data.data);
@@ -28,9 +28,9 @@ export const actionLogin = (objUserCredentials) => (dispatch) => {
     });
 };
 
-export const actionRegister = (objUserCredentials) => (dispatch) => {
+export const actionRegister = (objUserCredentials) => async (dispatch) => {
   dispatch(actionRegisterBegin());
-  return axios
+  return await axios
     .post(`${URI_AUTH}/register`, objUserCredentials)
     .then(({ data }) => {
       setToken(data.data);

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Wrapper from '../../../layouts/Wrapper/Wrapper';
 import Button from '../../atoms/Button/Button';
 import Title from '../../atoms/Title/Title';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionDeleteExpense } from '../../../actions/ActionExpense';
+import { actionDeleteExpense, actionFetchExpenses } from '../../../actions/ActionExpense';
 
 const Container = styled.div`
   width: 50%;
@@ -30,12 +30,18 @@ const HistoryItem = styled.div`
 `;
 
 const History = () => {
-  const arrExpenses = useSelector((state) => state.ReducerExpense.arrExpenses);
+  const [arrExpenses, setArrExpenses] = useState(false);
+  const arrReduxExpenses = useSelector((state) => state.ReducerExpense.arrExpenses);
+
+  useEffect(() => {
+    setArrExpenses(arrReduxExpenses.data);
+  }, [arrReduxExpenses, arrExpenses, setArrExpenses])
+
   const dispatch = useDispatch();
   return (
     <Container>
       <Title>History</Title>
-      {arrExpenses.length ? (
+      {arrExpenses ? (
         arrExpenses.map((objTransaction) => (
           <Wrapper key={objTransaction.strId}>
             <HistoryItem bExpense={objTransaction.strType === 'expense'}>
@@ -45,6 +51,7 @@ const History = () => {
             <Button
               onClick={() => {
                 dispatch(actionDeleteExpense(objTransaction.strId));
+                dispatch(actionFetchExpenses())
               }}
               key={objTransaction.strId}
               color="red"

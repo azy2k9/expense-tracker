@@ -14,9 +14,9 @@ import {
 
 export const URI_BALANCE = `/api/v1/stats`;
 
-export const actionFetchBalance = () => (dispatch) => {
+export const actionFetchBalance = () => async (dispatch) => {
   dispatch(actionFetchBalanceBegin());
-  return axios
+  return await axios
     .get(`${URI_BALANCE}/balance`)
     .then(({ data }) => {
       return dispatch(actionFetchBalanceSuccess(data));
@@ -27,9 +27,9 @@ export const actionFetchBalance = () => (dispatch) => {
     });
 };
 
-export const actionFetchIncome = () => (dispatch) => {
+export const actionFetchIncome = () => async (dispatch) => {
   dispatch(actionFetchIncomeBegin());
-  return axios
+  return await axios
     .get(`${URI_BALANCE}/income`)
     .then(({ data }) => {
       return dispatch(actionFetchIncomeSuccess(data));
@@ -40,9 +40,9 @@ export const actionFetchIncome = () => (dispatch) => {
     });
 };
 
-export const actionFetchExpense = () => (dispatch) => {
+export const actionFetchExpense = () => async (dispatch) => {
   dispatch(actionFetchExpenseBegin());
-  return axios
+  return await axios
     .get(`${URI_BALANCE}/expense`)
     .then(({ data }) => {
       return dispatch(actionFetchExpenseSuccess(data));

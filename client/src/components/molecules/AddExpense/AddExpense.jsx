@@ -5,7 +5,7 @@ import Title from '../../atoms/Title/Title';
 import Input from '../../atoms/Input/Input';
 import Radio from '../../atoms/Radio/Radio';
 import Button from '../../atoms/Button/Button';
-import { actionAddExpense } from '../../../actions/ActionExpense';
+import { actionAddExpense, actionFetchExpenses } from '../../../actions/ActionExpense';
 import { useDispatch } from 'react-redux';
 import lodash from 'lodash';
 import moment from 'moment';
@@ -85,6 +85,8 @@ const AddExpense = () => {
                 setDate(moment().format('YYYY-MM-DD'));
               })
             );
+
+            dispatch(actionFetchExpenses());
           }}
           color="#4c4"
           accent="#4c4"
